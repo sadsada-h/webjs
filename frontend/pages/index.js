@@ -9,7 +9,7 @@ export default function Home() {
     <div className={styles.home}>
       
     <h2>Welcome to Ticket buyer</h2>
-   <div><Navbar />
+   <div>
      <p>we are helpers That will make shopping fun no longer difficult. just use the service Book tickets on our website It will make everything easy.</p>
    </div>
  </div>
