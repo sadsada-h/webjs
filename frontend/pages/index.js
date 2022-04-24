@@ -1,17 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Navbar from '../components/Navbar'
-import styles from '../styles/Home.module.css'
+import { useSession, signIn, signOut } from "next-auth/react"
 
-export default function Home() {
-  return (
-    
-    <div className={styles.home}>
-      
-    <h2>Welcome to Ticket buyer</h2>
-   <div>
-     <p>we are helpers That will make shopping fun no longer difficult. just use the service Book tickets on our website It will make everything easy.</p>
-   </div>
- </div>
-)
+
+export default function Component() {
+  const { data: session } = useSession()
+  if (session) {
+    return (
+      <ul class="flex">
+      <li class="mr-6">
+        <a class="text-blue-500 hover:text-blue-800" href="#">Active</a>
+      </li>
+      <li class="mr-6">
+        <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+      </li>
+      <li class="mr-6">
+        <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+      </li>
+      <li class="mr-6">
+        <a class="text-gray-400 cursor-not-allowed" href="#">Disabled</a>
+      </li>
+    </ul>
+  )
+}
 }

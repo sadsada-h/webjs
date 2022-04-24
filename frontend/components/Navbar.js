@@ -2,19 +2,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Navbar() {
-  return (
-    <div className="container">
-      <nav>
-        <Image src="/ticket.png" width={50} height={48} />
-        <h1>ticket</h1>
-        <ul>
-          <li><Link href="/"><a>Home</a></Link></li>
-          
-        </ul>
-      </nav>
-      <div className="banner">
-        <Image src="/memes.jpeg" width={440} height={720} />
-      </div>
-    </div>
-  )
+    return (
+        <ul class="flex">
+  <li class="mr-6">
+    <a class="text-blue-500 hover:text-blue-800" href="#">Active</a>
+  </li>
+  <li class="mr-6">
+    <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+  </li>
+  <li class="mr-6">
+    <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+  </li>
+  
+</ul>
+    )
 }
