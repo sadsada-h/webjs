@@ -1,7 +1,7 @@
 const express = require('express'),
     app = express(),
     passport = require('passport'),
-    port = process.env.PORT || 80,
+    port = process.env.PORT || 8080,
     cors = require('cors'),
     cookie = require('cookie')
 
@@ -9,7 +9,6 @@ const bcrypt = require('bcrypt')
 
 const db = require('./database.js')
 let users = db.users
-let student = db.student
 
 require('./passport.js')
 
@@ -24,7 +23,7 @@ router.use(express.urlencoded({ extended: false }))
 
 let products = {
     list: [
-        { id: 1, name: 'UTHA', number: 44, price: 1200, imageurl: "https://i.pinimg.com/564x/f2/2e/3e/f22e3e76e6e40bea8c76439d5456f78f.jpg?format=jpg&name=900x900" },
+        { id: 1, name: 'UTHA', number: 44, price: 1200, imageurl: "https://i.pinimg.com/564x/f2/2e/3e/f22e3e76e6e40bea8c76439d5456f78f?format=jpg&name=900x900" },
         { id: 2, name: 'HOUSTON', number: 0, price: 2000, imageurl: "https://i.pinimg.com/474x/32/5d/ea/325dea7aa78368cc74af9a643abf0975.jpg?format=jpg&name=900x900" },
         { id: 3, name: 'DALLAS', number: 77, price: 1500, imageurl: "https://i.pinimg.com/474x/10/29/0d/10290d3b1a3a27a88509c2d637ffbd69.jpg?format=jpg&name=900x900" },
         { id: 4, name: 'CAVALIERS', number: 23, price: 5000, imageurl: "https://i.pinimg.com/474x/f8/34/53/f8345373485b7ca4b250b48de093317b.jpg?format=jpg&name=900x900" },
@@ -86,28 +85,28 @@ router.get('/profile',
 ;
 
 router.route('/products')
-    .get((req, res) => res.json(products.list))
+    .get((_req, res) => res.json(products.list))
     .post((req, res) => {
         console.log(req.body)
-        let newPet = {}
-        newPet.id = (products.list.length) ? products.list[products.list.length - 1].id + 1 : 1
-        newPet.name = req.body.name
-        newPet.number = req.body.number
-        newPet.price = req.body.price
-        newPet.imageurl = req.body.imageurl
-        products = { "list": [...products.list, newPet] }
+        let newproducts = {}
+        newproducts.id = (products.list.length) ? products.list[products.list.length - 1].id + 1 : 1
+        newproducts.name = req.body.name
+        newproducts.number = req.body.number
+        newproducts.price = req.body.price
+        newproducts.imageurl = req.body.imageurl
+        products = { "list": [...products.list, newproducts] }
         res.json(products.list)
     })
 
-router.route('/products/:pet_id')
+router.route('/products/:products_id')
     .get((req, res) => {
-        const pet_id = req.params.pet_id
-        const id = products.list.findIndex(item => +item.id === +pet_id)
+        const products_id = req.params.products_id
+        const id = products.list.findIndex(item => +item.id === +products_id)
         res.json(products.list[id])
     })
     .put((req, res) => {
-        const pet_id = req.params.pet_id
-        const id = products.list.findIndex(item => +item.id === +pet_id)
+        const products_id = req.params.products_id
+        const id = products.list.findIndex(item => +item.id === +products_id)
         products.list[id].id = req.body.id
         products.list[id].name = req.body.name
         products.list[id].number = req.body.number
@@ -116,26 +115,26 @@ router.route('/products/:pet_id')
         res.json(products.list)
     })
     .delete((req, res) => {
-        const pet_id = req.params.pet_id
-        products.list = products.list.filter(item => +item.id !== +pet_id)
+        const products_id = req.params.products_id
+        products.list = products.list.filter(item => +item.id !== +products_id)
         res.json(products.list)
     })
 
 
 
 router.route('/income')
-    .get((req, res) => res.json(income))
+    .get((_req, res) => res.json(income))
 
 
 
-router.route('/purchase/:pet_id')
+router.route('/purchase/:products_id')
     .delete((req, res) => {
-        const pet_id = req.params.pet_id
-        const id = products.list.findIndex(item => +item.id === +pet_id)
-        console.log('PetID: ', pet_id, 'ID: ', id)
+        const products_id = req.params.products_id
+        const id = products.list.findIndex(item => +item.id === +products_id)
+        console.log('productsID: ', products_id, 'ID: ', id)
         if (id !== -1) {
             income += products.list[id].price
-            products.list = products.list.filter(item => +item.id !== +pet_id)
+            products.list = products.list.filter(item => +item.id !== +products_id)
             res.json(products.list)
         }
         else {
@@ -163,20 +162,20 @@ router.post('/register',
         }
     })
 
-router.put('/reproducts/:pet_id',
+router.put('/reproducts/:products_id',
     async (req, res) => {
-        const pet_id = req.params.pet_id
-        const id = products.list.findIndex(item => +item.id === +pet_id)
+        const products_id = req.params.products_id
+        const id = products.list.findIndex(item => +item.id === +products_id)
         if (products.list[id].number > 0)
             products.list[id].number--
         res.json(req.products)
 
     })
 
-router.put('/addpet/:pet_id',
+router.put('/addproducts/:products_id',
     async (req, res) => {
-        const pet_id = req.params.pet_id
-        const id = products.list.findIndex(item => +item.id === +pet_id)
+        const products_id = req.params.products_id
+        const id = products.list.findIndex(item => +item.id === +products_id)
         products.list[id].number++
         res.json(req.products)
     })
@@ -189,7 +188,7 @@ router.get('/', (req, res, next) => {
 });
 
 // Error Handler
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
     let statusCode = err.status || 500
     res.status(statusCode);
     res.json({
@@ -199,6 +198,7 @@ app.use((err, req, res, next) => {
         }
     });
 });
+
 
 // Start Server
 app.listen(port, () => console.log(`Server is running on port ${port}`))

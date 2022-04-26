@@ -2,15 +2,14 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import { useState } from 'react'
 import Navbar from '../components/navbar'
-import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import config from '../config/config'
-
 
 export default function Login({ token }) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [status, setStatus] = useState('')
 
     const login = async (req, res) => {
         try {
@@ -29,24 +28,26 @@ export default function Login({ token }) {
     }
 
     const loginForm = () => (
-        <div class="w-full max-w-xs">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                        Username
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                        Password
-                    </label>
-                    <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" onChange={(e) => setPassword(e.target.value)} />
-                    <p class="text-red-500 text-xs italic">Please choose a password.</p>
-                </div>
-
-            </form>
+        <div class="font-serif">
+            <div>
+                Username:
+            </div>
+            <div>
+                <input type="text"
+                    name="username"
+                    placeholder="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </div>
+            <div>
+                Password:
+            </div>
+            <div>
+                <input type="password"
+                    name="password"
+                    placeholder="password"
+                    onChange={(e) => setPassword(e.target.value)} />
+            </div>
         </div>
     )
 
@@ -56,28 +57,40 @@ export default function Login({ token }) {
 
     return (
         <Layout>
-            <Head>
+            <Head >
                 <title>Login</title>
+                <meta charset="utf-8"></meta>
+
+
+
+
+
+                <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@1,300&display=swap" rel="stylesheet"></link>
             </Head>
+            <div class="bg-red-100 sm:h-screen ">
+                <Navbar />
+                <div class="py-20">
+                    <div class="py-20">
+                        <div class="py-20">
+                            <div class="py-18">
+                                <div class=" justify-center bg-gradient-to-r from-purple-500 to-pink-500 p-9 grid grid-row-3 gap-3 pt-10 ">
+                                    <h1 class="pt-6 text-3xl text-blue-600 flex flex-col justify-around  items-center ">Login</h1>
 
-            <div className={styles.container}>
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div>{loginForm()}</div>
 
-                    <div>
-                        <input type="checkbox"
-                            name="IsRememberMe"
-                            onChange={(e) => setIscheck(e.target.value)}
-                        />Remember me!
-                        <br /><br />
+                                    <div>
+                                        {status}
+                                    </div>
+
+                                    {loginForm()}
+                                    <div>
+                                        <button onClick={login} class="shadow-md mr-4 bg-red-500 p-2 rounded-lg hover:bg-red-200 hover:text-red-500 font-bold font-serif">Login</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="flex items-center justify-between">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={login}>
-                            Sign In
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </Layout>
     )

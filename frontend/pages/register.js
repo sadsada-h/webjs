@@ -13,15 +13,8 @@ export default function Register({ token }) {
     const [password, setPassword] = useState('')
     const [status, setStatus] = useState('')
 
-    const profileUser = async () => {
-        console.log('token: ', token)
-        const users = await axios.get(`${config.URL}/profile`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-        console.log('user: ', users.data)
-    }
 
-    const register = async (req, res) => {
+    const register = async () => {
         try {
             let result = await axios.post(`${config.URL}/register`,
                 { username, email, password })
@@ -39,29 +32,29 @@ export default function Register({ token }) {
     const registerForm = () => (
         <div>
 
-            <div class="font-mono">
+            <div class="font-serif">
                 Username:
             </div>
-            <div class="font-mono">
+            <div class="font-serif">
                 <input type="text"
                     name="username"
                     placeholder="username"
                     onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
-            <div class="font-mono">
+            <div class="font-serif">
                 Email:&nbsp;&nbsp;
             </div>
-            <div class="font-mono">
+            <div class="font-serif">
                 <input type="email"
                     name="email"
                     placeholder="email"
                     onChange={(e) => setEmail(e.target.value)} />
             </div>
-            <div class="font-mono">
+            <div class="font-serif">
                 Password:&nbsp;&nbsp;
             </div>
-            <div class="font-mono">
+            <div class="font-serif">
                 <input type="password"
                     name="password"
                     placeholder="password"
@@ -87,7 +80,7 @@ export default function Register({ token }) {
                         <div class="py-20">
                             <div class="py-18">
                                 <div class=" justify-center bg-gradient-to-r from-purple-500 to-pink-500 p-9 grid grid-row-3 gap-3 pt-10 ">
-                                    <h1 class="pt-6 text-3xl text-blue-600 flex flex-col justify-around  items-center font-bold font-mono">Register</h1>
+                                    <h1 class="pt-6 text-3xl text-blue-600 flex flex-col justify-around  items-center font-bold font-serif">Register</h1>
 
 
                                     <div>
@@ -96,7 +89,7 @@ export default function Register({ token }) {
 
                                     {registerForm()}
                                     <div>
-                                        <button onClick={register} class="shadow-md mr-4 bg-red-500 p-2 rounded-lg hover:bg-red-200 hover:text-red-500 font-mono">Register</button>
+                                        <button onClick={register} class="shadow-md mr-4 bg-red-500 p-2 rounded-lg hover:bg-red-200 hover:text-red-500 font-serif">Register</button>
                                     </div>
                                 </div>
                             </div>
@@ -109,6 +102,6 @@ export default function Register({ token }) {
     )
 }
 
-export function getServerSideProps({ req, res }) {
+export function getServerSideProps({ req }) {
     return { props: { token: req.cookies.token || "" } };
 }

@@ -67,7 +67,7 @@ const SWR1 = () => {
                 <div >
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"></link>
 
-                    <li key={index} class=" rounded-lg outline outline-offset-1 outline-cyan-500 outline outline-offset-4"><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@1,300&display=swap " rel="stylesheet"></link>
+                    <li key={index} class=" rounded-lg outline outline-offset-1 outline-cyan-500"><link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@1,300&display=swap " rel="stylesheet"></link>
 
                         <h6 >Name:{(product) ? product.name : '-'}</h6>
                         <img src={(product.imageurl)} width="160" height="100"></img>
