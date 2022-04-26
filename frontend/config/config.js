@@ -1,11 +1,10 @@
-
-const LOCAL_URL = 'http://localhost:8080/api';
+const LOCAL_URL = 'http://localhost/api';
 const PROD_URL = 'https://production.werapun.com/api';
 
 console.log('node env', process.env.NODE_ENV);
 
 const common = {
-    PORT: 8080 
+    PORT: 80 
 }
 
 const development = {

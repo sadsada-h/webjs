@@ -36,9 +36,9 @@ const SWR2 = () => {
             return products.map((product, index) =>
             
                 <li key={index} class=" rounded-lg outline outline-offset-1 outline-blue-200 ">
-                    <h6 class="text-2xl text-indigo-500 pb-1 pt-1 not-italic font-bold font-serif">{(product) ? product.name : '-'}</h6>
-                    <img src={product.imageurl} width="160" height="100" class="items-center justify-around"></img>
-                    <div class="border-4 border-blue-200 rounded-lg bg-red-100 divide-y-4 divide-blue-200">
+                    <h6 class="text-2xl text-red-500 pb-1 pt-1 not-italic font-bold font-serif">{(product) ? product.name : '-'}</h6>
+                    <img src={product.imageurl} width="200" height="100" class="items-center justify-around"></img>
+                    <div class="border-4 border-blue-200 rounded-lg bg-red-100 divide-y-4 divide-blue-300">
                     <h6 class="font-bold font-serif">Number:{(product) ? product.number : 0}</h6>
                     <h6 class="font-bold font-serif">price:{(product) ? product.price : 0}</h6>
 
@@ -48,12 +48,12 @@ const SWR2 = () => {
                 
             )
         else
-            return <h1 class="font-bold font-serif text-2xl text-pink-500 items-center "> No product</h1>
+            return <h1 class="font-bold font-serif text-2xl text-teal-900 items-center "> No product</h1>
     }
     return (<div class="bg-red-100 sm:h-screen items-center " >
         <Navbar />
         <div class="flex flex-col justify-around  items-center">
-        <h1 class="text-4xl text-pink-500 pb-8 pt-8 font-bold font-serif">products Show</h1>
+        <h1 class="text-4xl text-teal-900 pb-8 pt-8 font-bold font-serif">Products Show</h1>
         <ul class=" grid grid-cols-6 gap-10  " >{printproduct()}</ul>
         </div>
     </div>
